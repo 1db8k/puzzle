@@ -8,7 +8,7 @@ import {NgForm} from 'angular2/common';
   template: `
     <section class="setup">
       <h2>Game Setup</h2>
-      Enter your name, bitch.
+      Enter your name.
       <input type="text" #nameInput [(ngModel)]="name">
     </section>
     <section
