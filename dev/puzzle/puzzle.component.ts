@@ -8,21 +8,21 @@ import {NgForm} from 'angular2/common';
   template: `
     <section class="setup">
       <h2>Game Setup</h2>
-      Enter your name.
-      <input type="text" #name (keyup)="0">
+      Enter your name, bitch.
+      <input type="text" #nameInput [(ngModel)]="name">
     </section>
     <section
     [ngClass]="{
       puzzle: true,
       correct: switch1.value == switch1Number && switch2.value == switch2Number && switch3.value == switch3Number && switch4.value == switch4Number
     }"
-    [ngStyle]="{display: name.value === '' ? 'none' : 'block'}">
+    *ngIf="nameInput.value">
       <h2>
         The Puzzle |
         {{switch1.value == switch1Number && switch2.value == switch2Number && switch3.value == switch3Number && switch4.value == switch4Number ? 'SOLVED' : 'NOT SOLVED'}}
 
       </h2>
-      <p>Welcome, <span class="name">{{name.value}}</span></p>
+      <p>Welcome, <span class="name">{{name}}</span></p>
       <br>
       Switch1:
       <input type="text" #switch1 (keyup)="0"><br><br>
@@ -34,7 +34,7 @@ import {NgForm} from 'angular2/common';
       <input type="text" #switch4 (keyup)="0"><br><br>
 
     </section>
-    <h2 [hidden]="switch1.value != switch1Number || switch2.value != switch2Number || switch3.value != switch3Number || switch4.value != switch4Number" class="congrats">Congratulations, {{name.value}}! You did it!</h2>
+    <h2 *ngIf="switch1.value == switch1Number && switch2.value == switch2Number && switch3.value == switch3Number && switch4.value == switch4Number" class="congrats">Congratulations, {{name}}! You did it!</h2>
 
 
   `,
@@ -42,7 +42,7 @@ import {NgForm} from 'angular2/common';
 })
 
 export class PuzzleComponent implements OnInit {
-  // name: string
+  name: string
   switch1Number: number
   switch2Number: number
   switch3Number: number
@@ -55,5 +55,4 @@ export class PuzzleComponent implements OnInit {
 
     console.log(`${this.switch1Number}  ${this.switch2Number}  ${this.switch3Number}  ${this.switch4Number}`);
   }
-
 }
